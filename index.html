@@ -1,198 +1,335 @@
-<!DOCTYPE html><html lang="mr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sabir AI – Simple Website</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #333333;
-      --muted: #666666;
-      --primary: #4da6ff;
-      --primary-weak: #e8f3ff;
-      --bubble-user: #e9ecef;
-      --bubble-bot: #e8f3ff;
-      --shadow: 0 6px 24px rgba(0,0,0,0.06);
-      --radius: 16px;
-      --radius-lg: 20px;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }/* Header */
-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid #f1f1f1; }
-.nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.logo-mark { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); display: grid; place-items: center; color: #fff; font-weight: 800; box-shadow: var(--shadow); }
-nav ul { list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; }
-nav a { padding: 8px 12px; border-radius: 10px; }
-nav a:hover { background: #f7f9fb; }
+<meta charset="UTF-8">
+<title>MindBot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* Hero */
-.hero { padding: 64px 0 40px; text-align: center; }
-.hero h1 { font-size: clamp(28px, 4vw, 42px); margin: 10px 0 8px; }
-.hero p { color: var(--muted); margin: 0 auto 24px; max-width: 680px; }
-.avatar { width: 120px; height: 120px; margin: 0 auto 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffffff, #cfe7ff); display: grid; place-items: center; box-shadow: var(--shadow); border: 3px solid var(--primary-weak); }
-.btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn { border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-.btn-primary { background: var(--primary); color: #fff; }
-.btn-ghost { background: #f3f5f7; }
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b1d33;
+}
 
-/* Sections */
-section { padding: 48px 0; }
+/* LOGIN */
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+.login-box{
+  background:#06162d;
+  padding:30px;
+  border-radius:15px;
+  width:300px;
+  text-align:center;
+}
+.login-box input,.login-box button{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+}
+.login-box button{
+  background:#00bfff;
+  color:white;
+  cursor:pointer;
+}
 
-/* Chat Card */
-.chat-card { background: #fff; border: 1px solid #ececec; border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
-.chat-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; }
-.dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; }
-.chat-title { font-weight: 700; }
-.chat-body { height: 360px; overflow-y: auto; padding: 16px; background: #fafbfc; }
-.msg { max-width: 70%; margin: 8px 0; padding: 10px 12px; border-radius: 14px; line-height: 1.35; }
-.bot { background: var(--bubble-bot); border-top-left-radius: 6px; }
-.user { background: var(--bubble-user); margin-left: auto; border-top-right-radius: 6px; }
-.chat-input { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #f0f0f0; background: #fff; }
-.chat-input input { flex: 1; padding: 12px 14px; border: 1px solid #e5e7eb; border-radius: 12px; outline: none; }
-.chat-input button { padding: 10px 14px; border: 0; border-radius: 12px; font-weight: 600; cursor: pointer; }
+/* APP */
+#app{display:none;color:white;}
 
-/* Features */
-.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-.col-4 { grid-column: span 12; }
-@media (min-width: 768px) { .col-4 { grid-column: span 4; } }
-.card { background: #fff; border: 1px solid #ececec; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
-.card h3 { margin: 8px 0 6px; }
-.muted { color: var(--muted); }
+.header{
+  height:60px;
+  background:#06162d;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  gap:10px;
+}
+.menu{font-size:22px;cursor:pointer;}
 
-/* Footer */
-footer { border-top: 1px solid #f1f1f1; padding: 20px 0; color: var(--muted); text-align: center; }
+.logo img{width:38px;height:38px;}
+.title{font-size:22px;font-weight:bold;}
+.title span{color:#00bfff;}
 
-  </style>
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  top:0;left:-300px;
+  width:260px;height:100%;
+  background:white;color:black;
+  padding:15px;
+  transition:.3s;
+  z-index:10;
+}
+.sidebar ul{list-style:none;padding:0;margin-top:20px;}
+.sidebar li{
+  padding:10px;
+  cursor:pointer;
+  border-radius:8px;
+}
+.sidebar li:hover{background:#eee;}
+
+.profile{
+  position:absolute;
+  bottom:20px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-weight:bold;
+}
+.circle{
+  width:35px;height:35px;
+  background:#1e88e5;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* CHAT */
+.chat{
+  width:360px;
+  height:520px;
+  background:white;
+  margin:20px auto;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  color:black;
+}
+.chat-box{
+  flex:1;
+  background:#ece5dd;
+  padding:10px;
+  overflow-y:auto;
+}
+.msg{
+  max-width:70%;
+  padding:8px 12px;
+  margin:5px;
+  border-radius:10px;
+}
+.user{background:#dcf8c6;margin-left:auto;}
+.bot{background:white;}
+
+.input{
+  display:flex;
+  padding:10px;
+  gap:5px;
+}
+.input input{
+  flex:1;
+  padding:10px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+.input button{
+  border:none;
+  border-radius:50%;
+  width:40px;
+  cursor:pointer;
+  color:white;
+}
+.send{background:#075e54;}
+.mic{background:#1e88e5;}
+
+@media(max-width:600px){
+  .chat{
+    width:95%;
+    height:calc(100vh - 90px);
+  }
+}
+</style>
 </head>
+
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <div class="logo">
-        <div class="logo-mark">🤖</div>
-        <span>Sabir AI</span>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#chat">Chat</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-      </nav>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h2>Mind<span style="color:#00bfff">Bot</span></h2>
+    <input placeholder="Username" id="username">
+    <input type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="header">
+    <span class="menu" onclick="toggleMenu()">☰</span>
+    <div class="logo"><img src="sabir.png.jpeg" alt="MindBot Logo"></div>
+    <div class="title">Mind<span>Bot</span></div>
+  </div>
+
+  <div class="sidebar" id="side">
+    <ul>
+      <li onclick="newChat()">➕ New Chat</li>
+      <li onclick="viewHistory()">🕒 History</li>
+      <li onclick="setLang('en')">🌐 English</li>
+      <li onclick="setLang('hi')">🌐 Hindi</li>
+      <li onclick="setLang('mr')">🌐 Marathi</li>
+      <li onclick="logout()">🔓 Logout</li>
+    </ul>
+
+    <div class="profile">
+      <div class="circle" id="userCircle">U</div>
+      <span id="userName">User</span>
     </div>
-  </header>  <!-- Hero -->  <main id="home" class="hero container">
-    <div class="avatar">😊</div>
-    <h1>Hi, मी Sabir – तुझा AI Friend!</h1>
-    <p>Simple, fast आणि web‑based AI friend. Voice किंवा text ने बोलायला सुरू कर. खाली Chat सेक्शनमध्ये direct demo आहे.</p>
-    <div class="btn-row">
-      <a href="#chat"><button class="btn btn-primary">🎤 Voice Chat</button></a>
-      <a href="#chat"><button class="btn btn-ghost">💬 Text Chat</button></a>
+  </div>
+
+  <div class="chat">
+    <div class="chat-box" id="chat">
+      <div class="msg bot">Hi 👋 मी MindBot आहे</div>
     </div>
-  </main>  <!-- Chat Section -->  <section id="chat" class="container">
-    <div class="chat-card" role="region" aria-label="Chat with Sabir AI">
-      <div class="chat-header">
-        <div class="dot" title="online"></div>
-        <div class="chat-title">Sabir AI</div>
-        <div class="muted" style="margin-left:auto;">वेब डेमो</div>
-      </div>
-      <div id="chatBody" class="chat-body">
-        <div class="msg bot">नमस्कार! मी Sabir आहे. तू text टाइप कर किंवा 🎤 बटन दाबून बोलायला सुरू कर.</div>
-      </div>
-      <div class="chat-input">
-        <input id="chatInput" type="text" placeholder="इथे लिहा… (Enter दाबा)" aria-label="Type your message" />
-        <button id="micBtn" title="Voice input">🎤</button>
-        <button id="sendBtn" class="btn-primary">Send</button>
-      </div>
+
+    <div class="input">
+      <input id="msg" placeholder="Type or speak...">
+      <button class="mic" onclick="startVoice()">🎤</button>
+      <button class="send" onclick="sendMsg()">➤</button>
     </div>
-  </section>  <!-- Features -->  <section class="container">
-    <div class="grid">
-      <div class="card col-4">
-        <h3>🤝 Natural Chat</h3>
-        <p class="muted">Marathi/Hindi/English मध्ये smooth संवाद. (Demo सध्या local)</p>
-      </div>
-      <div class="card col-4">
-        <h3>❤️ Emotional Touch</h3>
-        <p class="muted">मूड नुसार प्रतिसाद व avatar expressions (v1: simple reactions).</p>
-      </div>
-      <div class="card col-4">
-        <h3>🧠 Memory (Opt‑in)</h3>
-        <p class="muted">आवडी/रिमाइंडर्स जतन करण्याची सोय (API जोडल्यावर).</p>
-      </div>
-    </div>
-  </section>  <!-- About -->  <section id="about" class="container">
-    <h2>About</h2>
-    <p class="muted">Sabir AI हा एक web‑based virtual friend प्रोजेक्ट आहे. याचा उद्देश साधा आहे: सोप्या UI मधून मैत्रीपूर्ण संवाद, voice/text input, आणि पुढे personalization.</p>
-  </section>  <footer>
-    © 2025 Sabir Sayyad · AI Friend Project
-  </footer>  <script>
-    // --- Simple Chat Demo (Front‑end only placeholder) ---
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const micBtn = document.getElementById('micBtn');
+  </div>
+</div>
 
-    function addMessage(text, who = 'user') {
-      const div = document.createElement('div');
-      div.className = `msg ${who === 'user' ? 'user' : 'bot'}`;
-      div.textContent = text;
-      chatBody.appendChild(div);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
+<script>
+const loginDiv=document.getElementById("login");
+const appDiv=document.getElementById("app");
+const side=document.getElementById("side");
+const chat=document.getElementById("chat");
+const msg=document.getElementById("msg");
+const usernameInput=document.getElementById("username");
+const userNameDisplay=document.getElementById("userName");
+const userCircle=document.getElementById("userCircle");
 
-    function fakeBotReply(userText) {
-      // Very simple bot logic for demo
-      let reply = 'ठीक आहे! अजून सांग.';
-      const t = userText.trim().toLowerCase();
-      if (!t) return;
-      if (t.includes('hi') || t.includes('hello') || t.includes('नमस्कार')) reply = 'हाय! कसा आहेस? 😊';
-      if (t.includes('joke') || t.includes('जोक')) reply = 'शिक्षक: चंद्रावर जीवन आहे का? विद्यार्थी: आहे ना! तिथे “निशा” तर रोज जाते 😄';
-      if (t.includes('time')) reply = 'घड्याळ बघ ना 😜 (अस्सल उत्तर API जोडल्यावर येईल)';
-      if (t.includes('help') || t.includes('मदत')) reply = 'मी मदतीसाठी आहे. “reminder”, “note”, “joke” असे काही बोलून बघ!';
-      setTimeout(() => addMessage(reply, 'bot'), 450);
-    }
+let sidebar=false;
+let lang=localStorage.getItem("lang")||"en";
 
-    function handleSend() {
-      const text = chatInput.value;
-      if (!text.trim()) return;
-      addMessage(text, 'user');
-      chatInput.value = '';
-      fakeBotReply(text);
-    }
+/* LOGIN */
+if(localStorage.getItem("login")==="yes"){
+  userNameDisplay.textContent = localStorage.getItem("username") || "User";
+  showApp();
+}
 
-    sendBtn.addEventListener('click', handleSend);
-    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
+function login(){
+  const uname = usernameInput.value.trim() || "User";
+  localStorage.setItem("login","yes");
+  localStorage.setItem("username", uname);
+  userNameDisplay.textContent = uname;
+  userCircle.textContent = uname[0].toUpperCase();
+  showApp();
+}
 
-    // --- Voice Input (Web Speech API placeholder) ---
-    let recognizing = false;
-    let recognition;
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SR();
-      recognition.lang = 'mr-IN'; // Marathi; change to 'hi-IN' or 'en-US' as needed
-      recognition.interimResults = false;
+function logout(){
+  localStorage.removeItem("login");
+  location.reload();
+}
 
-      recognition.onresult = (event) => {
-        const text = event.results[0][0].transcript;
-        addMessage(text, 'user');
-        fakeBotReply(text);
-      };
-      recognition.onend = () => { recognizing = false; micBtn.textContent = '🎤'; };
+function showApp(){
+  loginDiv.style.display="none";
+  appDiv.style.display="block";
+}
 
-      micBtn.addEventListener('click', () => {
-        if (recognizing) { recognition.stop(); return; }
-        recognition.start(); recognizing = true; micBtn.textContent = '⏸️';
-      });
-    } else {
-      micBtn.addEventListener('click', () => {
-        alert('Voice input साठी तुमचा ब्राउझर सपोर्ट करत नाही. Chrome वापरून बघा.');
-      });
-    }
+/* SIDEBAR */
+function toggleMenu(){
+  side.style.left = sidebar ? "-300px" : "0";
+  sidebar=!sidebar;
+}
+document.addEventListener("click", e=>{
+  if(sidebar && !side.contains(e.target) && !e.target.classList.contains("menu")){
+    side.style.left="-300px"; sidebar=false;
+  }
+});
 
-    // TODO: Replace fakeBotReply with real API call:
-    // fetch('/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ text })})
-    //   .then(r => r.json()).then(d => addMessage(d.reply, 'bot'));
-  </script></body>
+/* LANGUAGE */
+function setLang(l){
+  lang=l;
+  localStorage.setItem("lang",l);
+  addMsg(
+    l==="en"?"Language changed to English":
+    l==="hi"?"भाषा हिंदी में बदल दी गई":
+    "भाषा मराठीत बदलली",
+    "bot"
+  );
+}
+
+/* CHAT */
+function addMsg(text,type){
+  const d=document.createElement("div");
+  d.className="msg "+type;
+  d.innerText=text;
+  chat.appendChild(d);
+  chat.scrollTop=chat.scrollHeight;
+}
+
+function sendMsg(){
+  if(msg.value.trim()=="")return;
+  addMsg(msg.value,"user");
+  autoReply(msg.value);
+  msg.value="";
+}
+
+/* SMART REPLY */
+function autoReply(userText){
+  const t=userText.toLowerCase();
+  let reply="";
+
+  if(t.includes("hi")||t.includes("hello")||t.includes("नमस्कार")){
+    reply = lang==="en"?"Hi! How are you 😊":
+            lang==="hi"?"नमस्ते! आप कैसे हैं 😊":
+            "नमस्कार! कसा आहेस 😊";
+  }
+  else if(t.includes("how are you")||t.includes("kasa aahes")||t.includes("kaise ho")){
+    reply = lang==="en"?"I’m good 😊 You can talk to me freely.":
+            lang==="hi"?"मैं ठीक हूँ 😊 मुझसे दोस्त की तरह बात करो।":
+            "मी छान आहे 😊 तू माझ्याशी मोकळेपणाने बोल.";
+  }
+  else if(t.includes("joke")||t.includes("जोक")||t.includes("विनोद")){
+    reply = lang==="en"
+      ? "Why don’t programmers like nature? Because it has too many bugs 😄"
+      : lang==="hi"
+      ? "प्रोग्रामर को नेचर क्यों पसंद नहीं? क्योंकि उसमें बहुत सारे bugs होते हैं 😄"
+      : "प्रोग्रामरला निसर्ग का आवडत नाही? कारण तिथे खूप bugs असतात 😄";
+  }
+  else{
+    reply = lang==="en"?"Okay 🙂 tell me more.":
+            lang==="hi"?"ठीक है 🙂 आगे बताइए।":
+            "ठीक आहे 🙂 पुढे सांग.";
+  }
+
+  setTimeout(()=>addMsg(reply,"bot"),600);
+}
+
+/* VOICE */
+function startVoice(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){alert("Voice not supported");return;}
+  const recog=new SpeechRecognition();
+  recog.lang=lang==="en"?"en-IN":lang==="hi"?"hi-IN":"mr-IN";
+  recog.start();
+  recog.onresult=e=>{
+    msg.value=e.results[0][0].transcript;
+    sendMsg();
+  };
+}
+
+/* NEW CHAT */
+function newChat(){
+  chat.innerHTML="";
+  addMsg(lang==="en"?"Hi 👋 I am MindBot":"hi"?"Hi 👋 मैं MindBot हूँ":"Hi 👋 मी MindBot आहे","bot");
+}
+
+/* HISTORY */
+function viewHistory(){
+  alert("Chat history feature is demo only 🙂");
+}
+</script>
+
+</body>
 </html>
